@@ -1,0 +1,22 @@
+Come in the form of a zip file
+will be able to use computers and filezilla (for testing)
+Most code is already written
+specific lines of code (2 or 3) that we'll need to write
+Only have from 4:40 to 6:00
+Each question graded individually, but if it all works
+Around three or four total files we'll be editing
+
+URL variables = GET variables
+
+$selectedBookCategoriesFlat = array();
+foreach($selectedBookCategories as $selectedCategory) {
+  $selectedBookCategoriesFlat[] = $selectedCategory['categoryid'];
+}
+
+
+<?php foreach($categories as $category) : ?>
+  <?php if(in_array($category['categoryid'],
+  $selectedBookCategoriesFlat)) : ?>
+    <input type="checkbox" value ="<?php echo
+    $category['categoryid'] ?>" checked /> <?php echo
+    $category['name']; ?><br />

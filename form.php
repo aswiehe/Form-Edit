@@ -99,7 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$params = array(
 			'title' => $title,
 			'author' => $author,
-			'price' => $price
+			'price' => $price,
+			'isbn' => $isbn
 		);
 		$statement->execute($params);
 
@@ -113,20 +114,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$statement->execute($params);
 
 		// insert new categories
+		echo "printing book_categories";
+		print_r($book_categories);
 		$sql = file_get_contents('sql/insertBookCategory.sql');
 		$statement = $database->prepare($sql);
 		foreach($book_categories as $category) {
 			$params = array(
 				'isbn' => $isbn,
-				'categoryid' => $categoryid
+				'categoryid' => $category
 			);
 			$statement->execute($params);
 		}
 	}
 
 	// Redirect to book listing page
-	header('location: index.php');
-	die();
+	// header('location: index.php');
+	// die();
 }
 
 // In the HTML, if an edit form:

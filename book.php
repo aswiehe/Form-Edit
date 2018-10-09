@@ -17,8 +17,7 @@ $params = array(
 $statement = $database->prepare($sql);
 $statement->execute($params);
 $books = $statement->fetchAll(PDO::FETCH_ASSOC);
-print_r($books[0]);
-echo "<br><br><br>";
+
 // Set $book equal to the first book in $books
 $book = $books[0];
 
@@ -30,8 +29,6 @@ $params = array(
 );
 $statement->execute($params);
 $categories = $statement->fetchAll(PDO::FETCH_ASSOC);
-echo "printing categories...";
-print_r($categories);
 
 /* In the HTML:
 	- Print the book title, author, price

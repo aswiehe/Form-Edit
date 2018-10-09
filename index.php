@@ -39,8 +39,8 @@ $books = searchBooks($term, $database);
 				<?php echo $book['author']; ?> <br />
 				<?php echo $book['price']; ?> <br />
 				<?php echo $book['isbn']; ?> <br />
-				<a href="book.php?isbn=<?php echo $book['isbn'] ?>">book.php</a><br />
-				<a href="form.php?isbn=<?php echo $book['isbn'] ?>&action=edit">form.php</a><br />
+				<a href="book.php?isbn=<?php echo $book['isbn'] ?>">See book profile (book.php)</a><br />
+				<a href="form.php?isbn=<?php echo $book['isbn'] ?>&action=edit">Go to form to edit book info (form.php)</a><br />
 				<!-- For each book add links to view the book on book.php an d a link to edit the book.
 			</p>
 		<?php endforeach; ?>

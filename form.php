@@ -33,16 +33,16 @@ if(!empty($isbn)) {
 	// 	   Set $book_categories equal to a list of category ids associated to a book from the database. Note you may need to
 	//     get book categories from the database and create a secondary array.
 	$sql = file_get_contents('sql/getBooksCategories.sql');
+	$params = array(
+		'isbn' => $isbn
+	);
   $statement = $database->prepare($sql);
-  $statement->execute();
+  $statement->execute($params);
   $categories = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 	foreach($categories as $selectedCategory) {
 	  $book_categories[] = $selectedCategory['categoryid'];
 	}
-
-	echo "printing book_categories";
-	print_r($book_categories);
 
 	// Set action = edit (an isbn has been passed in)
 }
@@ -92,7 +92,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 
 	elseif ($action == 'edit') {
-		echo "action is edit";
 		// Update general information about book
 		$sql = file_get_contents('sql/updateBook.sql');
 		$statement = $database->prepare($sql);
@@ -126,8 +125,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 
 	// Redirect to book listing page
-	// header('location: index.php');
-	// die();
+	header('location: index.php');
+	die();
 }
 
 // In the HTML, if an edit form:

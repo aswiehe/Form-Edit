@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		foreach($book_categories as $category) {
 			$params = array(
 				'isbn' => $isbn,
-				'categoryid' => $category
+				'categoryid' => $categoryid
 			);
 			$statement->execute($params);
 		}
@@ -115,11 +115,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// insert new categories
 		$sql = file_get_contents('sql/insertBookCategory.sql');
 		$statement = $database->prepare($sql);
-		$params = array(
-			'isbn' => $isbn,
-			'categoryid' => $categoryid
-		);
-		$statement->execute($params);
+		foreach($book_categories as $category) {
+			$params = array(
+				'isbn' => $isbn,
+				'categoryid' => $categoryid
+			);
+			$statement->execute($params);
+		}
 	}
 
 	// Redirect to book listing page

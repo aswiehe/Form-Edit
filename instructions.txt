@@ -1,0 +1,64 @@
+header('location: index.php');
+die() // always call this after redirecting as done above with header('abc');
+
+SELECT category_name
+FROM categories
+WHERE categoryid = :categoryid // :categoryid is a variable passed in using params array before prepared statement
+$categories = statement->fetchAll(PDO::FETCH_ASSOC); // always after running a SELECT query
+
+
+functions.php
++ Create a function named get() that:
+	+ takes a parameter holding a $_GET key as a string
+
+		aw - $_GET is an associative array for variables (variable name is key, variable value is value, in key-value pairs)
+		aw - checking to see if the variable is set (ie, in the url) so it doesn't throw an error
+		aw - check if the key is set, and if it's set return the key (are you sure you don't mean we're returning the value?), otherwise return an empty string
+		aw - if no checkboxes are checked, need to check if null
+
+
+	- if the GET variable isset, return the GET variable
+	- else return an empty string
+
+index.php
++ Using the get function, get the search term from the URL
+D Add a link printed for each book to book.php passing the isbn in the URL
+D Add a link printed for each book to form.php with an action of edit and passing the isbn  in the URL
+
+getBook.sql (must create)
++ an SQL query to find a book where an isbn is equal to an isbn parameter passed
+
+updateBooks.sql (must create)
++ an SQL query to find book categories where an isbn is equal to an isbn parameter passed
+
+book.php
++ Get the book isbn from the url using the get function
++ Get a list of books from the database with the matching isbn (getBook.sql)
++ Set $book equal to the first book in $books (remember arrays start at 0)
++ Get categories of book from the database (getBookCategories.sql)
++ In the HTML:
+	+ Print the book title, author and price
+	+ List the categories associated with this book
+
+updateBook.sql (must create)
+* an SQL query to update a book where an isbn is equal to an isbn parameter passed
+
+deleteBookCategories.sql (must create)
+* an SQL query to delete a book’s categories where an isbn is equal to an isbn parameter passed
+
+form.php
+? If book isbn is not empty, (view in file comments)
+    ? Get book record into $books variable from the database
+    ? Set $book equal to the first book in $books
+    ? Set $book_categories equal to a list of category ids associated to a book from the database. Note you may need to get book categories from the database and create a secondary array.
+* In the else if edit section of the form processing
+	* Update the book in the database (updateBook.sql)
+	* Remove all categories associated with the book from the book categories table based upon the isbn (deleteBookCategories.sql)
+	* Insert book categories associated with book similar to add functionality (insertBookCategory.sql)
++ In the HTML, if an edit form:
+	+ Populate text boxes with current data of book selected
+	+ Print the checkbox with the book's current categories already checked (selected)
+
+
+AW OPTIONAL -
+- Add a link to the form page, but passing in "add" rather than "edit"
